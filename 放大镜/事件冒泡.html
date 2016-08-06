@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#small-pic{
+			width: 200px;
+			height: 200px;
+			float:left;
+			margin-right:5px;
+			position: relative;
+			background:red;
+		}
+
+		#drag{
+			width: 40px;
+			height: 40px;
+			background:yellow;
+			opacity: 0.6;
+			filter: alpha(opacity=60);
+			position: absolute;
+			display: none;
+		}
+		#big-pic{
+			width: 200px;
+			height: 200px;
+			overflow: hidden;
+			float:left;
+			display: none;
+			background: green;
+
+		}
+		#mask{
+			width: 200px;
+			height: 200px;
+			background: pink;
+			position: absolute;
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="small-pic">
+	<div id="drag"></div>
+	<div id="mask"></div>
+	</div>
+	<div id="big-pic">
+		
+	</div>
+	<script>
+		var oSmallPic=document.getElementById('small-pic');
+		var oDrag=document.getElementById('drag');
+		var oBigPic=document.getElementById('big-pic');
+		var oMask=document.getElementById('mask');
+		oMask.onmouseover=function(){
+			oDrag.style.display='block';
+			oBigPic.style.display='block';
+			console.log('1');
+		};
+		oMask.onmouseout=function(){
+			oDrag.style.display='none';
+			oBigPic.style.display='none';
+			console.log('2');
+
+		};
+		oMask.onmousemove=function(e){
+			e=e||window.event;
+			var left=e.clientX-oDrag.offsetWidth/2;
+			var top=e.clientY-oDrag.offsetHeight/2;
+			oDrag.style.left=left+'px';
+			oDrag.style.top=top+'px';
+		};
+	</script>
+</body>
+</html>
